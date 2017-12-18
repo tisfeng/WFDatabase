@@ -11,6 +11,7 @@
 
 @implementation MJStudent
 MJLogAllIvars
+//MJCodingImplementation
 
 //+ (NSDictionary *)mj_replacedKeyFromPropertyName
 //{

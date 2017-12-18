@@ -43,6 +43,7 @@
 		80245A951FE610BB00595820 /* MJStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 80245A891FE610BB00595820 /* MJStudent.m */; };
 		80245A961FE610BB00595820 /* MJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 80245A8B1FE610BB00595820 /* MJUser.m */; };
 		80245A991FE610CF00595820 /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 80245A981FE610CE00595820 /* MJExtensionConfig.m */; };
+		807434D51FE6D1520032B29D /* FastCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 807434D41FE6D1520032B29D /* FastCoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,8 @@
 		80245A8B1FE610BB00595820 /* MJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJUser.m; sourceTree = "<group>"; };
 		80245A971FE610CE00595820 /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConfig.h; sourceTree = "<group>"; };
 		80245A981FE610CE00595820 /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConfig.m; sourceTree = "<group>"; };
+		807434D31FE6D1520032B29D /* FastCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastCoder.h; sourceTree = "<group>"; };
+		807434D41FE6D1520032B29D /* FastCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastCoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,7 @@
 		80245A031FE60F3600595820 = {
 			isa = PBXGroup;
 			children = (
+				807434D21FE6D1520032B29D /* FastCoder */,
 				80245A661FE6109000595820 /* FMDB */,
 				80245A411FE60F5C00595820 /* MJExtension */,
 				80245A771FE610BB00595820 /* Modle */,
@@ -304,6 +308,15 @@
 			children = (
 			);
 			path = Modle;
+			sourceTree = "<group>";
+		};
+		807434D21FE6D1520032B29D /* FastCoder */ = {
+			isa = PBXGroup;
+			children = (
+				807434D31FE6D1520032B29D /* FastCoder.h */,
+				807434D41FE6D1520032B29D /* FastCoder.m */,
+			);
+			path = FastCoder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,6 +471,7 @@
 				80245A961FE610BB00595820 /* MJUser.m in Sources */,
 				80245A621FE60F5D00595820 /* NSString+MJExtension.m in Sources */,
 				80245A5B1FE60F5D00595820 /* MJProperty.m in Sources */,
+				807434D51FE6D1520032B29D /* FastCoder.m in Sources */,
 				80245A611FE60F5D00595820 /* NSObject+MJProperty.m in Sources */,
 				80245A141FE60F3600595820 /* ViewController.m in Sources */,
 				80245A941FE610BB00595820 /* MJStatusResult.m in Sources */,

@@ -8,58 +8,106 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ YTKKeyValueItem 模型是转化后，在SQLite数据库中存储存储的对象
+ itemKey:       存储数据的主键
+ itemObject:    存储对象序列化NSData
+ createdTime:   数据存储时间戳
+ */
 @interface YTKKeyValueItem : NSObject
 
-@property (strong, nonatomic) NSString *itemId;
+@property (strong, nonatomic) NSString *itemKey;
 @property (strong, nonatomic) id itemObject;
 @property (strong, nonatomic) NSDate *createdTime;
 
 @end
 
-
 @interface WxfDatabase : NSObject
 
+/**
+ 快捷方法初始化数据库，document/database.sqlite
+ */
 + (id)shareDatabase;
 
+/**
+ 新建或打开document目录下名为dbName数据库
+ */
 - (id)initDBWithName:(NSString *)dbName;
 
+/**
+ 新建或打开dbPath路径数据库
+ */
 - (id)initWithDBWithPath:(NSString *)dbPath;
 
+/**
+ 新建tableName表
+ */
 - (void)createTableWithName:(NSString *)tableName;
 
+/**
+ 判断表是否已存在
+ */
 - (BOOL)isTableExists:(NSString *)tableName;
 
+/**
+ 清空表数据
+ */
 - (void)clearTable:(NSString *)tableName;
 
+/**
+ 删除表
+ */
 - (void)dropTable:(NSString *)tableName;
-
-- (void)close;
 
 ///************************ Put&Get methods *****************************************
 
-- (void)putObject:(id)object withId:(NSString *)objectId intoTable:(NSString *)tableName;
+/**
+ 存储一条数据到数据库
 
-- (id)getObjectById:(NSString *)objectId fromTable:(NSString *)tableName;
+ @param object 存储的对象，可以是模型，字典或数组，或是NSString NSNumber等其他OC数据类型
+ @param objectKey 存储时设置的key值，类似字典的key
+ @param tableName 存储的数据表
+ */
+- (void)putObject:(id)object withKey:(NSString *)objectKey intoTable:(NSString *)tableName;
 
-- (YTKKeyValueItem *)getYTKKeyValueItemById:(NSString *)objectId fromTable:(NSString *)tableName;
+/**
+ 取值
 
-- (void)putString:(NSString *)string withId:(NSString *)stringId intoTable:(NSString *)tableName;
+ @param objectKey 根据key取值
+ @param tableName 表名
+ @return 返回存储的对象，前后数据类型不变
+ */
+- (id)getObjectByKey:(NSString *)objectKey fromTable:(NSString *)tableName;
 
-- (NSString *)getStringById:(NSString *)stringId fromTable:(NSString *)tableName;
+/**
+ 获取该表中所有的元素
 
-- (void)putNumber:(NSNumber *)number withId:(NSString *)numberId intoTable:(NSString *)tableName;
+ @param tableName 表名
+ @return 返回该表的object数组
+ */
+- (NSArray *)getAllObjectsFromTable:(NSString *)tableName;
 
-- (NSNumber *)getNumberById:(NSString *)numberId fromTable:(NSString *)tableName;
+/**
+ 查询表中元素个数
 
-- (NSArray *)getAllItemsFromTable:(NSString *)tableName;
-
+ @param tableName 表名
+ @return 表中元素个数count
+ */
 - (NSUInteger)getCountFromTable:(NSString *)tableName;
 
-- (void)deleteObjectById:(NSString *)objectId fromTable:(NSString *)tableName;
+/**
+ 根据key值删除表中某个数据
+ */
+- (void)deleteObjectByKey:(NSString *)objectKey fromTable:(NSString *)tableName;
 
-- (void)deleteObjectsByIdArray:(NSArray *)objectIdArray fromTable:(NSString *)tableName;
+/**
+ 删除表中包含key值数组的数据
+ */
+- (void)deleteObjectsByKeyArray:(NSArray *)objectKeyArray fromTable:(NSString *)tableName;
 
-- (void)deleteObjectsByIdPrefix:(NSString *)objectIdPrefix fromTable:(NSString *)tableName;
-
+/**
+ 删除表中以key为前缀的数据
+ */
+- (void)deleteObjectsByKeyPrefix:(NSString *)objectKeyPrefix fromTable:(NSString *)tableName;
 
 @end
