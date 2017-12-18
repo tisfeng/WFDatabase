@@ -1,35 +1,34 @@
-//
-//  AppDelegate.m
-//  WxfDatabase
-//
-//  Created by isfeng on 2017/12/17.
-//  Copyright © 2017年 isfeng. All rights reserved.
-//
+##简介
 
-#import "AppDelegate.h"
-#import "WxfDatabase.h"
-#import "MJStudent.h"
-#import "MJBag.h"
+这是一个基于FMDB封装的轻量级数据库，可直接存储自定义对象、字典数组或是其他OC类型数据。在唐巧的[YTKKeyValueStore]((https://github.com/yuantiku/YTKKeyValueStore)) 上引入对象序列化存储。序列化库使用的是[FastCoding](https://github.com/nicklockwood/FastCoding)
 
-@interface AppDelegate ()
+##使用 	
 
-@end
+####极简的存取方法
 
-@implementation AppDelegate
+```
+/**
+ 存储一条数据到数据库
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
-    [self wxfDatabase_test];
-    
-    return YES;
-}
+ @param object 存储的对象，可以是模型，字典或数组，或是NSString NSNumber等其他OC数据类型
+ @param objectKey 存储时设置的key值，类似字典的key
+ @param tableName 存储的数据表
+ */
+- (void)putObject:(id)object withKey:(NSString *)objectKey intoTable:(NSString *)tableName;
 
 /**
- *  YTKKeyValueStore + MJExtension
+ 取值
+
+ @param objectKey 根据key取值
+ @param tableName 表名
+ @return 返回存储的对象，前后数据类型不变
  */
-- (void)wxfDatabase_test {
-    
+- (id)getObjectByKey:(NSString *)objectKey fromTable:(NSString *)tableName;
+```
+
+####示例：
+
+```
 //    初始化数据库，创建test表
     NSString *test_table = @"test";
     WxfDatabase *database = [WxfDatabase shareDatabase];
@@ -129,9 +128,7 @@
         MJStudent *stu = modleArr2[i];
         NSLog(@"stu: %@",stu);
     }
-}
-
-
+    
 // 一个student测试对象
 - (MJStudent *)student {
     
@@ -151,6 +148,6 @@
     
     return stu;
 }
+```
 
-
-@end
+ps: 对象序列化使用 `FastCoder`，需在Target设置`-fno-objc-arc` 非ARC
