@@ -1,6 +1,6 @@
 ## 简介
 
-这是一个基于FMDB封装的轻量级数据库，可直接存储自定义对象、字典数组或是其他OC类型数据。在唐巧的[YTKKeyValueStore]((https://github.com/yuantiku/YTKKeyValueStore))基础上引入对象序列化存储。序列化库使用的是[FastCoding](https://github.com/nicklockwood/FastCoding)
+这是一个基于FMDB封装的轻量级数据库，可直接存储自定义对象、字典数组或是其他OC类型数据。在唐巧的[YTKKeyValueStore](https://github.com/yuantiku/YTKKeyValueStore) 基础上引入对象序列化存储。序列化库使用的是[FastCoding](https://github.com/nicklockwood/FastCoding)
 
 ## 使用
 
