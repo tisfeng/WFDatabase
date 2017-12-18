@@ -1,10 +1,10 @@
-##简介
+## 简介
 
-这是一个基于FMDB封装的轻量级数据库，可直接存储自定义对象、字典数组或是其他OC类型数据。在唐巧的[YTKKeyValueStore]((https://github.com/yuantiku/YTKKeyValueStore)) 上引入对象序列化存储。序列化库使用的是[FastCoding](https://github.com/nicklockwood/FastCoding)
+这是一个基于FMDB封装的轻量级数据库，可直接存储自定义对象、字典数组或是其他OC类型数据。在唐巧的[YTKKeyValueStore]((https://github.com/yuantiku/YTKKeyValueStore))基础上引入对象序列化存储。序列化库使用的是[FastCoding](https://github.com/nicklockwood/FastCoding)
 
-##使用 	
+## 使用
 
-####极简的存取方法
+#### 极简的存取方法
 
 ```
 /**
@@ -26,7 +26,7 @@
 - (id)getObjectByKey:(NSString *)objectKey fromTable:(NSString *)tableName;
 ```
 
-####示例：
+## 示例：
 
 ```
 //    初始化数据库，创建test表
@@ -129,6 +129,7 @@
         NSLog(@"stu: %@",stu);
     }
     
+    
 // 一个student测试对象
 - (MJStudent *)student {
     
@@ -150,4 +151,4 @@
 }
 ```
 
-ps: 对象序列化使用 `FastCoder`，需在Target设置`-fno-objc-arc` 非ARC
+> ps: 对象序列化使用 `FastCoder`，需设置`-fno-objc-arc` 非ARC
