@@ -25,7 +25,7 @@
 @interface WxfDatabase : NSObject
 
 /**
- 快捷方法初始化数据库，document/database.sqlite
+ 快捷方法初始化默认数据库，document/database.sqlite
  */
 + (instancetype)shareDatabase;
 + (instancetype)shareDatabaseWithName:(NSString *)dbName;
@@ -45,11 +45,6 @@
  新建tableName表
  */
 - (void)createTableWithName:(NSString *)tableName;
-
-/**
- 判断表是否已存在
- */
-- (BOOL)isTableExists:(NSString *)tableName;
 
 /**
  清空表数据

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewHeight;
 
 @end
 
@@ -18,9 +19,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.view.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"You"].CGImage);
+//    self.view.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"You"].CGImage);
+    self.view.backgroundColor = [UIColor orangeColor];
 }
 
+- (void)updateViewConstraints {
+    [super updateViewConstraints];
+    _viewHeight.constant = 900;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

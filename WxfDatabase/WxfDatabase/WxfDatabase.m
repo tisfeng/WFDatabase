@@ -41,6 +41,7 @@
 //默认数据库
 static NSString *const DEFAULT_DB_NAME = @"database.sqlite";
 
+
 /*   建表
      key：标识主键
      dictData：序列化后的存储对象
@@ -84,7 +85,7 @@ static NSString *const DROP_TABLE_SQL = @" DROP TABLE '%@' ";
 }
 
 /**
- 快捷方法初始化数据库，document/database.sqlite
+ 快捷方法初始化默认数据库，document/database.sqlite
  */
 + (instancetype)shareDatabase {
     return [[self alloc] init];
@@ -143,6 +144,14 @@ static NSString *const DROP_TABLE_SQL = @" DROP TABLE '%@' ";
     }
     NSString * sql = [NSString stringWithFormat:CREATE_TABLE_SQL, tableName];
     __block BOOL result;
+    
+//    如果未指定数据库，则创建使用默认数据库...
+    if (!_dbQueue) {
+        NSString * dbPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:DEFAULT_DB_NAME];
+        debugLog(@"未存在database,创建默认数据库dbPath = %@", dbPath);
+        _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
+    }
+    
     [_dbQueue inDatabase:^(FMDatabase *db) {
         result = [db executeUpdate:sql];
     }];
@@ -218,7 +227,7 @@ static NSString *const DROP_TABLE_SQL = @" DROP TABLE '%@' ";
     NSError * error;
 //    NSData * data = [NSJSONSerialization dataWithJSONObject:object options:0 error:&error];
 //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object]; //这种方式需要先归档
-//    改用MJExtension,可将OC基础类型+自定义对象 序列化
+//    使用MJExtension,可将OC基础类型+自定义对象 序列化
 #if 0
     if ([NSStringFromClass([object class]) isEqualToString:@"__NSCFNumber"]) {
 //        data = [NSJSONSerialization dataWithJSONObject:@[object] options:0 error:&error];
@@ -230,7 +239,7 @@ static NSString *const DROP_TABLE_SQL = @" DROP TABLE '%@' ";
         data = [object mj_JSONData]; 
     }
 #endif
-/*  考虑到MJ序列化有缺陷，使用系统NSJSONSerialization只能序列化字典或数组，对于NSString NSNumber类型需要自己再包装，容易导致前后存取类型不一致。自定义对象要先转为字典在序列化，后取出时需手动再转模型。   另外还发现，使用mj_JSONData序列化时调用的mj_keyValues方法在作第一层数据类型判断时，若为OC基础对象则会直接返回对象本身，也就是说MJ不能序列化自定义的对象数组。。。
+/*  考虑到MJ序列化有缺陷，使用系统NSJSONSerialization只能序列化字典或数组，对于NSString NSNumber类型需要自己再包装，容易导致前后存取类型不一致。自定义对象要先转为字典在序列化，后取出时需手动再转模型。   另外还发现，使用mj_JSONData序列化时调用的mj_keyValues方法在作第一层数据类型判断时，若为OC基础对象则会直接返回对象本身，也就是说MJ不能序列化自定义的对象数组。。。弃
  
     改用FastCoder对象序列化，更高效，且可使前后存取数据类型保持存取一致。赞！！！
  */
@@ -244,6 +253,12 @@ static NSString *const DROP_TABLE_SQL = @" DROP TABLE '%@' ";
     NSString * sql = [NSString stringWithFormat:UPDATE_ITEM_SQL, tableName];
     //    UPDATE_ITEM_SQL = @"REPLACE INTO %@ (id, json, createdTime) values (?, ?, ?)"
     __block BOOL result;
+    
+//    若不存在当前表，则创建...
+    if (![self isTableExists:tableName]) {
+        [self createTableWithName:tableName];
+    }
+    
     [_dbQueue inDatabase:^(FMDatabase *db) {
         result = [db executeUpdate:sql, objectKey, data, createdTime];
     }];
