@@ -60,7 +60,7 @@
     [database createTableWithName:stu_table];
     
 //    student对象
-    MJStudent *stu = [self student];
+    MJStudent *stu = [self create_student];
     NSLog(@"stu: %@",stu);
     
 //    存取自定义对象，对象模型内可嵌套对象（将对象序列化，存储数据库）
@@ -112,7 +112,7 @@
 //    缓存大量数据时，可直接存储对象数组
     NSMutableArray *modleArr = [NSMutableArray array];
     for (int i = 0; i < 1000; i++) {
-        MJStudent *stu = [self student];
+        MJStudent *stu = [self create_student];
         stu.ID = [NSString stringWithFormat:@"%4d",i];
         stu.age = i;
         stu.gay = YES;
@@ -132,8 +132,8 @@
 }
 
 
-//    一个student测试对象
-- (MJStudent *)student {
+//    创建一个student测试对象
+- (MJStudent *)create_student {
     
     MJBag *bag = [[MJBag alloc] init];
     bag.name = @"小书包";
