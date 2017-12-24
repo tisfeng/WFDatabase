@@ -9,7 +9,6 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewHeight;
 
 @end
 
@@ -23,10 +22,6 @@
     self.view.backgroundColor = [UIColor orangeColor];
 }
 
-- (void)updateViewConstraints {
-    [super updateViewConstraints];
-    _viewHeight.constant = 900;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
