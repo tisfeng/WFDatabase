@@ -25,6 +25,7 @@
     return YES;
 }
 
+
 /**
  *  YTKKeyValueStore+FastCoder
  */
@@ -59,7 +60,7 @@
     NSString *stu_table = @"student";
     [database createTableWithName:stu_table];
     
-//    student对象
+//    创建student对象
     MJStudent *stu = [self create_student];
     NSLog(@"stu: %@",stu);
     
@@ -90,11 +91,11 @@
     NSLog(@"stuModleArr: %@",stuModleArr);
     
 //    修改key值为stu的元素数据
-    NSLog(@"原先对象数据stu.ID=%@",stu.ID);
+    NSLog(@"原先对象stu.ID=%@",stu.ID);
     stu.ID = @"12345";
     [database putObject:stu withKey:@"stu" intoTable:stu_table];
     MJStudent *stu12345 = [database getObjectByKey:@"stu" fromTable:stu_table];
-    NSLog(@"修改后对象数据stu.ID=%@",stu12345.ID);
+    NSLog(@"修改后对象stu.ID=%@",stu12345.ID);
     
 //    删除key为stu4的元素
     [database deleteObjectByKey:@"stu4" fromTable:stu_table];
