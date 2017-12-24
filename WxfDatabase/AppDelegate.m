@@ -56,6 +56,7 @@
     NSArray *arr2 = [database getObjectByKey:@"arr" fromTable:test_table];
     NSLog(@"arr2: %@",arr2);
     
+    
 //    新建student表
     NSString *stu_table = @"student";
     [database createTableWithName:stu_table];
@@ -64,7 +65,7 @@
     MJStudent *stu = [self create_student];
     NSLog(@"stu: %@",stu);
     
-//    存取自定义对象，对象模型内可嵌套对象（将对象序列化，存储数据库）
+//    存取自定义对象，对象模型内可嵌套对象 （将对象序列化，存储数据库）
     [database putObject:stu withKey:@"stu" intoTable:stu_table];
 //    取对象
     MJStudent *student = [database getObjectByKey:@"stu" fromTable:stu_table];
