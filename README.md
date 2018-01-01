@@ -6,7 +6,7 @@
 
 #### 极简的存取方法
 
-```
+```objective-c
 /**
  存储一条数据到数据库
 
@@ -28,7 +28,7 @@
 
 ## 示例：
 
-```
+```objective-c
 //    初始化数据库，创建test表（默认数据库位于document/database.sqlite）
     WxfDatabase *database = [WxfDatabase shareDatabase];
     NSString *test_table = @"test";
