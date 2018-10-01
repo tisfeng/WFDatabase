@@ -9,20 +9,19 @@
 #import <Foundation/Foundation.h>
 
 /**
+ 包装存储对象
  YTKKeyValueItem 模型是转化后，在SQLite数据库中存储存储的对象
  itemKey:       存储数据的主键
  itemObject:    存储对象序列化NSData
  createdTime:   数据存储时间戳
  */
 @interface YTKKeyValueItem : NSObject
-
 @property (strong, nonatomic) NSString *itemKey;
 @property (strong, nonatomic) id itemObject;
 @property (strong, nonatomic) NSDate *createdTime;
-
 @end
 
-@interface WxfDatabase : NSObject
+@interface WFDatabase : NSObject 
 
 /**
  快捷方法初始化默认数据库，document/database.sqlite
@@ -47,7 +46,7 @@
 - (void)createTableWithName:(NSString *)tableName;
 
 /**
- 清空表数据
+ 清空表数据（表还在）
  */
 - (void)clearTable:(NSString *)tableName;
 
@@ -56,10 +55,10 @@
  */
 - (void)dropTable:(NSString *)tableName;
 
-///************************ Put&Get methods *****************************************
+///************************ Put&Get methods ***********************************
 
 /**
- 存储一条数据到数据库
+ 存储一条数据到数据库表
 
  @param object 存储的对象，可以是模型，字典或数组，或是NSString NSNumber等其他OC数据类型
  @param objectKey 存储时设置的key值，类似字典的key

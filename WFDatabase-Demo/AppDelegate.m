@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "WxfDatabase.h"
+#import "WFDatabase.h"
 #import "MJStudent.h"
 #import "MJBag.h"
+
 
 @interface AppDelegate ()
 
@@ -20,7 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [self wxfDatabase_test];
+    [self wf_databaseTest];
+    
     
     return YES;
 }
@@ -29,10 +31,10 @@
 /**
  *  YTKKeyValueStore+FastCoder
  */
-- (void)wxfDatabase_test {
+- (void)wf_databaseTest {
     
 //    初始化数据库，创建test表（默认数据库位于document/database.sqlite）
-    WxfDatabase *database = [WxfDatabase shareDatabase];
+    WFDatabase *database = [WFDatabase shareDatabase];
     NSString *test_table = @"test";
     [database createTableWithName:test_table];
     
@@ -136,7 +138,6 @@
 
 //    创建一个student测试对象
 - (MJStudent *)create_student {
-    
     MJBag *bag = [[MJBag alloc] init];
     bag.name = @"小书包";
     bag.price = 998;
